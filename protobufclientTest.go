@@ -191,6 +191,14 @@ func doProcess(conn net.Conn, req interface{}) {
 			fmt.Printf("login return options: %#v. \n", respbody.GetOptions())
 		}
 	}
+	infos := resp.GetInfos()
+	count := len(infos)
+	fmt.Printf("Resp infos len is %#v.\n", count)
+	for i := 0; i < count; i++ {
+		fmt.Printf("info[%d]:\n", i)
+		fmt.Printf("major(%#v), minor(%#v).\n",
+			infos[i].GetMajor(), infos[i].GetMinor())
+	}
 }
 
 func protobufclientTest() {
@@ -214,6 +222,15 @@ func protobufclientTest() {
 		Password: proto.String("fuck you"),
 		Msg:      proto.String("Girl"),
 	}
+	req.Infos = make([]*test.Extrainfo, 5)
+	for i := 0; i < 5; i++ {
+		req.Infos[i] = &test.Extrainfo{
+			Major: proto.Int32(int32(i - 3)),
+			Minor: proto.Int32(int32(i - 3)),
+		}
+	}
+	doProcess(conn, req)
+	req.Password = proto.String("wrong password")
 	doProcess(conn, req)
 }
 
