@@ -1,0 +1,5 @@
+将protoc文件放到全局环境搜索路径中，或放在本目录中，分别进入个目录（可写脚本循环），执行以下命令即可在对应目录下生成“.pb.go”文件：
+
+protoc -I . -I ../common --go_out=%GOPATH%/src *.proto  （linux系统下用$GOPATH代替%GOPATH%）
+
+原因在于每个proto文件中的 option go_package 起作用！（类似于 option java_package 作用）

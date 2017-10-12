@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"github.com/davidhenrygao/GolangTest/proto/common"
 	"github.com/davidhenrygao/GolangTest/proto/test"
 	"github.com/golang/protobuf/proto"
 	"io"
@@ -222,9 +223,9 @@ func protobufclientTest() {
 		Password: proto.String("fuck you"),
 		Msg:      proto.String("Girl"),
 	}
-	req.Infos = make([]*test.Extrainfo, 5)
+	req.Infos = make([]*common.Extrainfo, 5)
 	for i := 0; i < 5; i++ {
-		req.Infos[i] = &test.Extrainfo{
+		req.Infos[i] = &common.Extrainfo{
 			Major: proto.Int32(int32(i - 3)),
 			Minor: proto.Int32(int32(i - 3)),
 		}
