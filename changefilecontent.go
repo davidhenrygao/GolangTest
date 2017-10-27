@@ -43,11 +43,18 @@ func changefilecontent() {
 	fmt.Println()
 
 	//delete content
-	origF, err := os.Open("exchangekey.proto")
+	origfilename := "proto/common/extrainfo.proto"
+	origF, err := os.Open(origfilename)
 	if err != nil {
 		fmt.Printf("Open file err = %+v\n", err)
 		return
 	}
+	fileinfo, err := origF.Stat()
+	if err != nil {
+		fmt.Printf("Get origin file stat err = %+v\n", err)
+		return
+	}
+	fmt.Println("Original file base name: ", fileinfo.Name())
 	defer closeFile(origF)
 
 	csF, err := os.Create("exchangekey.cs.proto")
