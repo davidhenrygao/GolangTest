@@ -1,4 +1,6 @@
 package example;
+
+option go_package = "github.com/davidhenrygao/GolangTest/proto/example";
 	
 enum FOO { X = 17; };
 

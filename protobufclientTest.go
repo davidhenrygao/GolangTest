@@ -230,6 +230,13 @@ func protobufclientTest() {
 			Minor: proto.Int32(int32(i - 3)),
 		}
 	}
+	card := &test.Card{
+		Id:     proto.Uint32(1),
+		Level:  proto.Uint32(2),
+		Amount: proto.Uint32(3),
+		State:  proto.Uint32(4),
+	}
+	req.Card = card
 	doProcess(conn, req)
 	req.Password = proto.String("wrong password")
 	doProcess(conn, req)

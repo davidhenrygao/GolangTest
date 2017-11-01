@@ -1,5 +1,18 @@
+编译生成golang代码过程：
+
 将protoc文件放到全局环境搜索路径中，或放在本目录中，分别进入个目录（可写脚本循环），执行以下命令即可在对应目录下生成“.pb.go”文件：
 
-protoc -I . -I ../common --go_out=%GOPATH%/src *.proto  （linux系统下用$GOPATH代替%GOPATH%）
+	protoc -I . -I ../common --go_out=%GOPATH%/src *.proto  （linux系统下用$GOPATH代替%GOPATH%）
 
 原因在于每个proto文件中的 option go_package 起作用！（类似于 option java_package 作用）
+
+
+
+
+
+
+
+proto文件的package名与生成的golang代码文件的package名不完全等价：
+
+当proto文件不指定 option go_package 选项时，生成的golang代码package名与proto文件中定义的package名一致；
+当proto文件指定 option go_package选项时，生成的golang代码package名与go_package指定路径的最后文件夹名一致，而不管proto文件中定义的package名。
